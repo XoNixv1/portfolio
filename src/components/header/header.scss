@@ -1,0 +1,28 @@
+.header {
+  padding: 1.5rem;
+  background-color: black;
+  color: white;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+
+.header-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #a0a0a0;
+  margin-left: 2rem;
+}
+
+.header-links {
+  color: inherit;
+  display: flex;
+  gap: 6rem;
+  font-size: 0.8rem;
+  margin-right: 10rem;
+}

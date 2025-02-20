@@ -1,0 +1,79 @@
+.project-block {
+  justify-content: space-evenly;
+  align-items: center;
+  display: flex;
+  margin-top: 10rem;
+
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.589);
+    border-radius: 0.5rem;
+    background-color: rgb(34, 33, 33);
+    width: 40%;
+    height: 25rem;
+    padding: 4rem;
+    opacity: 0.9;
+    img {
+      border: 1px solid rgba(255, 255, 255, 0.678);
+      border-radius: 0.5rem;
+      width: auto;
+      height: auto;
+    }
+  }
+  &__descr {
+    display: flex;
+    flex-direction: column;
+    max-width: 40%;
+    margin-left: 4rem;
+    font-weight: 100;
+    font-size: 1.2rem;
+    &--label {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.label {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  font-weight: 900;
+  &__descr {
+    margin-top: 1rem;
+    font-size: 1.3rem;
+    font-weight: 400;
+  }
+}
+
+.buttons {
+  display: flex;
+  gap: 2rem;
+}
+
+.github-button.deploy {
+  width: 9rem;
+}
+
+.github-button {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  height: 2.4rem;
+  width: 12rem;
+  color: #c9cd0df2;
+  background-color: black;
+  border-bottom: 1px solid #c9cd0df2;
+  img {
+    height: 2rem;
+  }
+}
+
+.projects-block {
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+}

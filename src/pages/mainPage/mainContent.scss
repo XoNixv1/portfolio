@@ -1,0 +1,42 @@
+.descr-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 50%;
+}
+
+.main-image {
+  max-width: 26%;
+  border-radius: 1rem;
+  height: auto;
+  margin-right: 3rem;
+}
+
+.descr {
+  font-size: 18px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  margin-bottom: 3rem;
+}
+
+.contacts {
+  display: flex;
+  gap: 2rem;
+
+  a {
+    img {
+      transition: filter 0.3s ease-in-out;
+      &:hover {
+        filter: sepia(1) saturate(1000%) hue-rotate(10deg) brightness(1.2);
+      }
+    }
+  }
+}
+
+.main-block {
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
