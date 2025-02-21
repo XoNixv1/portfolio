@@ -15,15 +15,24 @@ export default function projectsPage() {
 
         {projects.map((project: Project, index: number) => (
           <div className="project-block" key={index}>
-            <div className="project-block__container">
+            <a
+              className="project-block__container"
+              href={project.link ? project.link : project.github}
+            >
               <img src={project.src} alt={`project-${project.label}`} />
-            </div>
+            </a>
             <div className="project-block__descr">
               <p className="project-block__descr--label">{project.label}</p>
               <p className="project-block__descr--descr">{project.descr}</p>
+              {project.note && (
+                <p className="note">
+                  <span className="note__label">Note: </span>
+                  {project.note}
+                </p>
+              )}
               <div className="buttons">
                 <button className="github-button" type="button">
-                  SEE ON GITHUB
+                  <a href={project.github}>SEE ON GITHUB</a>
                   <img
                     src="/assets/projects/logo/icons8-github.svg"
                     alt="gitHub"
@@ -31,7 +40,7 @@ export default function projectsPage() {
                 </button>
                 {project.deploy && (
                   <button className="github-button deploy" type="button">
-                    LIVE DEPLOY ↗
+                    <a href={project.link}>LIVE DEPLOY ↗</a>
                   </button>
                 )}
               </div>

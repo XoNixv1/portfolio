@@ -1,6 +1,9 @@
+import ContactForm from "../../components/contact-form/ContactForm";
+import { useForm } from "../../hooks/FormProvider";
 import "./mainContent.scss";
 
 export default function MainPage(): JSX.Element {
+  const { openForm } = useForm();
   return (
     <div
       className="main-page"
@@ -18,6 +21,9 @@ export default function MainPage(): JSX.Element {
               in esports, I bring focus and problem-solving skills to building
               efficient, accessible digital experiences.
             </p>
+            <button className="contact-button" onClick={() => openForm()}>
+              CONTACT
+            </button>
             <div className="contacts">
               <a href="https://www.linkedin.com/in/khaled-noman-19384733b/">
                 <img src="/assets/icons8-linkedin.svg" alt="Linkedin" />
