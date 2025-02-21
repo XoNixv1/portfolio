@@ -1,29 +1,49 @@
-import { useFormik } from "formik";
-import * as Yup from "yup";
 import "./contactForm.scss";
 import { useForm } from "../../hooks/FormProvider";
-import { useEffect, useRef } from "react";
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
+import SuccessModal from "../successModal/SuccessModal";
 
-const validationSchema = Yup.object({
-  name: Yup.string()
-    .min(3, "name must be at least 3 characters")
-    .required("name is required"),
-  mail: Yup.string()
-    .email("invalid email address")
-    .required("email is required"),
-  text: Yup.string()
-    .max(420, "message must be not more than 420 characters")
-    .required("message is required"),
-});
+interface FormErrors {
+  name?: string;
+  mail?: string;
+  text?: string;
+}
+interface FormValues {
+  name: string;
+  mail: string;
+  text: string;
+}
 
 export default function ContactForm() {
   const { closeForm, openedForm } = useForm();
+  const [successOpened, setSuccessOpened] = useState(false);
+
   const formRef = useRef<HTMLFormElement>(null);
+  const successRef = useRef<HTMLDivElement>(null);
+
+  const [formValues, setFormValues] = useState<FormValues>({
+    name: "",
+    mail: "",
+    text: "",
+  });
+  const [formErrors, setFormErrors] = useState<FormErrors>({});
+  const [touched, setTouched] = useState({
+    name: false,
+    mail: false,
+    text: false,
+  });
 
   useEffect(() => {
     const handleClickOut = (e: MouseEvent) => {
       if (formRef.current && !formRef.current.contains(e.target as Node)) {
         closeForm();
+      }
+      if (
+        successRef.current &&
+        !successRef.current.contains(e.target as Node)
+      ) {
+        closeForm();
+        setSuccessOpened(false);
       }
     };
 
@@ -36,26 +56,94 @@ export default function ContactForm() {
     };
   }, [openedForm, closeForm]);
 
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-      mail: "",
-      text: "",
-    },
-    validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
+  const validate = () => {
+    const errors: FormErrors = {};
+    const updatedTouched: typeof touched = {
+      name: false,
+      mail: false,
+      text: false,
+    };
+
+    if (!formValues.name) {
+      errors.name = "Name is required";
+      updatedTouched.name = true;
+    }
+
+    if (!formValues.mail) {
+      errors.mail = "Email is required";
+      updatedTouched.mail = true;
+    } else if (!/\S+@\S+\.\S+/.test(formValues.mail)) {
+      errors.mail = "Email is invalid";
+      updatedTouched.mail = true;
+    }
+
+    if (!formValues.text) {
+      errors.text = "Message is required";
+      updatedTouched.text = true;
+    }
+
+    setTouched(updatedTouched);
+
+    return errors;
+  };
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { id, value } = e.target;
+    setFormValues({ ...formValues, [id]: value });
+    setTouched({ ...touched, [id]: false });
+  };
+
+  // SUBMIT
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    const errors = validate();
+    setFormErrors(errors);
+
+    //sending with web3
+    if (Object.keys(errors).length === 0) {
+      const formData = new FormData(e.target as HTMLFormElement);
+
+      formData.append("access_key", "d99775f3-8cc9-4b79-8f4d-a9b190a4f59d"); //4a546538-5b16-48b9-82b9-58e8dbfb6a52 // main one
+
+      const object = Object.fromEntries(formData);
+      const json = JSON.stringify(object);
+
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: json,
+      }).then((res) => res.json());
+
+      if (res.success && openedForm) {
+        setFormValues({ name: "", mail: "", text: "" });
+        setSuccessOpened(true);
+      } else {
+        console.error("Error:", res);
+      }
+    }
+  };
 
   if (!openedForm) {
     return null;
   }
 
-  return (
+  return successOpened ? (
     <div className="overlay">
-      <form className="form" ref={formRef} onSubmit={formik.handleSubmit}>
-        <span className="close-btn" onClick={() => closeForm()}></span>
+      <SuccessModal
+        successRef={successRef}
+        setSuccessOpened={setSuccessOpened}
+        closeForm={closeForm}
+      />
+    </div>
+  ) : (
+    <div className="overlay">
+      <form noValidate className="form" ref={formRef} onSubmit={handleSubmit}>
+        <span className="close-btn" onClick={closeForm}></span>
         <p className="form__header">CONTACT</p>
 
         <div className="form__block">
@@ -64,24 +152,22 @@ export default function ContactForm() {
           </label>
           <input
             className={`form__input ${
-              formik.touched.name && formik.errors.name ? "invalid" : ""
+              touched.name && formErrors.name ? "invalid" : ""
             }`}
             id="name"
+            name="name"
             type="text"
-            aria-invalid={
-              formik.touched.name && formik.errors.name ? "true" : "false"
-            }
-            {...formik.getFieldProps("name")}
+            value={formValues.name}
+            onChange={handleChange}
+            aria-invalid={touched.name && formErrors.name ? "true" : "false"}
           />
           <div
             className={`form__error ${
-              formik.touched.name && formik.errors.name
-                ? "form__error--visible"
-                : ""
+              touched.name && formErrors.name ? "form__error--visible" : ""
             }`}
             role="alert"
           >
-            {formik.errors.name}
+            {formErrors.name}
           </div>
         </div>
 
@@ -91,24 +177,22 @@ export default function ContactForm() {
           </label>
           <input
             className={`form__input ${
-              formik.touched.mail && formik.errors.mail ? "invalid" : ""
+              touched.mail && formErrors.mail ? "invalid" : ""
             }`}
             id="mail"
+            name="email"
             type="email"
-            aria-invalid={
-              formik.touched.mail && formik.errors.mail ? "true" : "false"
-            }
-            {...formik.getFieldProps("mail")}
+            value={formValues.mail}
+            onChange={handleChange}
+            aria-invalid={touched.mail && formErrors.mail ? "true" : "false"}
           />
           <div
             className={`form__error ${
-              formik.touched.mail && formik.errors.mail
-                ? "form__error--visible"
-                : ""
+              touched.mail && formErrors.mail ? "form__error--visible" : ""
             }`}
             role="alert"
           >
-            {formik.errors.mail}
+            {formErrors.mail}
           </div>
         </div>
 
@@ -118,23 +202,21 @@ export default function ContactForm() {
           </label>
           <textarea
             className={`form__input form__input--txt ${
-              formik.touched.text && formik.errors.text ? "invalid" : ""
+              touched.text && formErrors.text ? "invalid" : ""
             }`}
             id="text"
-            aria-invalid={
-              formik.touched.text && formik.errors.text ? "true" : "false"
-            }
-            {...formik.getFieldProps("text")}
+            name="message"
+            value={formValues.text}
+            onChange={handleChange}
+            aria-invalid={touched.text && formErrors.text ? "true" : "false"}
           />
           <div
             className={`form__error ${
-              formik.touched.text && formik.errors.text
-                ? "form__error--visible"
-                : ""
+              touched.text && formErrors.text ? "form__error--visible" : ""
             }`}
             role="alert"
           >
-            {formik.errors.text}
+            {formErrors.text}
           </div>
         </div>
 

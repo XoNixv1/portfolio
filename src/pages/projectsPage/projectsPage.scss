@@ -38,6 +38,9 @@
 }
 
 .label {
+  display: flex;
+  flex-direction: column;
+  align-self: start;
   font-size: 3rem;
   margin-bottom: 2rem;
   font-weight: 900;

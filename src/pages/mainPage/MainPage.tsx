@@ -3,6 +3,8 @@ import { useForm } from "../../hooks/FormProvider";
 import "./mainContent.scss";
 
 export default function MainPage(): JSX.Element {
+  const email = "haled14253@gmail.com";
+  const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}`;
   const { openForm } = useForm();
   return (
     <div
@@ -38,9 +40,15 @@ export default function MainPage(): JSX.Element {
           </div>
           <img
             className="main-image"
-            src="/assets/main-photo.png"
+            src="/assets/main-photo.jpg"
             alt="photo"
           />
+        </div>
+        <div className="gmail link">
+          <img src="/assets/icons8-gmail.svg" alt="gmail" />
+          <a href={gmailLink} target="_blank" rel="noopener noreferrer">
+            {email}
+          </a>
         </div>
       </div>
     </div>

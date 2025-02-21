@@ -16,15 +16,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #ffff00;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #ffff00;
-}
-
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -35,26 +26,47 @@ h1 {
     color: #213547;
     background-color: #ffffff;
   }
-  a:hover {
-    color: #ffff00;
-  }
   button {
     background-color: #f9f9f9;
   }
 }
 
 .container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  padding-left: 10rem;
-  padding-right: 10rem;
-  /* display: flex; */
+  padding: 10rem 15rem 2rem 15rem;
   align-items: center;
   justify-content: space-between;
+  justify-content: center;
 }
 
 a {
   text-decoration: none;
   color: inherit;
+}
+
+.link {
+  position: relative;
+  border-bottom: 2px solid transparent;
+  display: inline-block;
+  &:hover {
+    color: #fdff73;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: -0.1rem;
+    width: 0;
+    height: 2px;
+    background-color: #fdff73;
+    transition: width 0.4s ease;
+  }
+  &:hover::before {
+    width: 105%;
+  }
 }
 
 .contact-button {

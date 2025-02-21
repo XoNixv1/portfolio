@@ -1,20 +1,36 @@
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import "./projectsPage.scss";
 import { projects, Project } from "./projects-data";
 
-export default function projectsPage() {
+export default function ProjectsPage() {
+  const delay = 100;
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+    });
+  }, []);
+
   return (
     <div className="projects-block">
       <div className="container">
         <div className="label">
           <h3 className="label__name">Featured Projects</h3>
-          <p className="label__descr">
+          <p className="label__descr" data-aos="fade" data-aos-delay={delay}>
             Here are some of the selected projects that showcase my passion for
             front-end development.
           </p>
         </div>
 
         {projects.map((project: Project, index: number) => (
-          <div className="project-block" key={index}>
+          <div
+            className="project-block"
+            key={index}
+            data-aos="fade"
+            data-aos-delay={delay}
+          >
             <a
               className="project-block__container"
               href={project.link ? project.link : project.github}

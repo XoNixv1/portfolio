@@ -6,7 +6,7 @@ export default function Footer() {
   const { openForm } = useForm();
   return (
     <footer className="footer">
-      <div className="footer__contacts">
+      {/* <div className="footer__contacts">
         <a href="https://www.linkedin.com/in/khaled-noman-19384733b/">
           <img src="/assets/icons8-linkedin.svg" alt="Linkedin" />
         </a>
@@ -16,7 +16,7 @@ export default function Footer() {
         <a href="https://x.com/XoNixLOL">
           <img src="/assets/icons8-twitter.svg" alt="Twitter" />
         </a>
-      </div>
+      </div> */}
       <div className="footer__links">
         <Link to="/">• HOME •</Link>
         <Link to="/projects">• MY PROJECTS •</Link>
