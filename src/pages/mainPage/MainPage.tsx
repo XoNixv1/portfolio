@@ -1,8 +1,7 @@
-import ContactForm from "../../components/contact-form/ContactForm";
 import { useForm } from "../../hooks/FormProvider";
 import "./mainContent.scss";
 
-export default function MainPage(): JSX.Element {
+export default function MainPage() {
   const email = "haled14253@gmail.com";
   const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}`;
   const { openForm } = useForm();

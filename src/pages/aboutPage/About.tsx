@@ -8,7 +8,7 @@ const images: string[] = [
   "/assets/about/photos/hq720.jpg",
 ];
 
-export default function About(): JSX.Element {
+export default function About() {
   return (
     <div className="container">
       <div className="about-block">
