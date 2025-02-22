@@ -2,6 +2,7 @@ import "./contactForm.scss";
 import { useForm } from "../../hooks/FormProvider";
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import SuccessModal from "../successModal/SuccessModal";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface FormErrors {
   name?: string;
@@ -132,98 +133,127 @@ export default function ContactForm() {
     return null;
   }
 
-  return successOpened ? (
-    <div className="overlay">
-      <SuccessModal
-        successRef={successRef}
-        setSuccessOpened={setSuccessOpened}
-        closeForm={closeForm}
-      />
-    </div>
-  ) : (
-    <div className="overlay">
-      <form noValidate className="form" ref={formRef} onSubmit={handleSubmit}>
-        <span className="close-btn" onClick={closeForm}></span>
-        <p className="form__header">CONTACT</p>
-
-        <div className="form__block">
-          <label className="form__label" htmlFor="name">
-            Your Name
-          </label>
-          <input
-            className={`form__input ${
-              touched.name && formErrors.name ? "invalid" : ""
-            }`}
-            id="name"
-            name="name"
-            type="text"
-            value={formValues.name}
-            onChange={handleChange}
-            aria-invalid={touched.name && formErrors.name ? "true" : "false"}
+  return (
+    <AnimatePresence>
+      {successOpened ? (
+        <motion.div
+          key="success"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="overlay"
+        >
+          <SuccessModal
+            successRef={successRef}
+            setSuccessOpened={setSuccessOpened}
+            closeForm={closeForm}
           />
-          <div
-            className={`form__error ${
-              touched.name && formErrors.name ? "form__error--visible" : ""
-            }`}
-            role="alert"
+        </motion.div>
+      ) : (
+        <motion.div
+          key="form"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="overlay"
+        >
+          <form
+            noValidate
+            className="form"
+            ref={formRef}
+            onSubmit={handleSubmit}
           >
-            {formErrors.name}
-          </div>
-        </div>
+            <span className="close-btn" onClick={closeForm}></span>
+            <p className="form__header">CONTACT</p>
 
-        <div className="form__block">
-          <label className="form__label" htmlFor="mail">
-            Your Email
-          </label>
-          <input
-            className={`form__input ${
-              touched.mail && formErrors.mail ? "invalid" : ""
-            }`}
-            id="mail"
-            name="email"
-            type="email"
-            value={formValues.mail}
-            onChange={handleChange}
-            aria-invalid={touched.mail && formErrors.mail ? "true" : "false"}
-          />
-          <div
-            className={`form__error ${
-              touched.mail && formErrors.mail ? "form__error--visible" : ""
-            }`}
-            role="alert"
-          >
-            {formErrors.mail}
-          </div>
-        </div>
+            <div className="form__block">
+              <label className="form__label" htmlFor="name">
+                Your Name
+              </label>
+              <input
+                className={`form__input ${
+                  touched.name && formErrors.name ? "invalid" : ""
+                }`}
+                id="name"
+                name="name"
+                type="text"
+                value={formValues.name}
+                onChange={handleChange}
+                aria-invalid={
+                  touched.name && formErrors.name ? "true" : "false"
+                }
+              />
+              <div
+                className={`form__error ${
+                  touched.name && formErrors.name ? "form__error--visible" : ""
+                }`}
+                role="alert"
+              >
+                {formErrors.name}
+              </div>
+            </div>
 
-        <div className="form__block">
-          <label className="form__label" htmlFor="text">
-            Your Message
-          </label>
-          <textarea
-            className={`form__input form__input--txt ${
-              touched.text && formErrors.text ? "invalid" : ""
-            }`}
-            id="text"
-            name="message"
-            value={formValues.text}
-            onChange={handleChange}
-            aria-invalid={touched.text && formErrors.text ? "true" : "false"}
-          />
-          <div
-            className={`form__error ${
-              touched.text && formErrors.text ? "form__error--visible" : ""
-            }`}
-            role="alert"
-          >
-            {formErrors.text}
-          </div>
-        </div>
+            <div className="form__block">
+              <label className="form__label" htmlFor="mail">
+                Your Email
+              </label>
+              <input
+                className={`form__input ${
+                  touched.mail && formErrors.mail ? "invalid" : ""
+                }`}
+                id="mail"
+                name="email"
+                type="email"
+                value={formValues.mail}
+                onChange={handleChange}
+                aria-invalid={
+                  touched.mail && formErrors.mail ? "true" : "false"
+                }
+              />
+              <div
+                className={`form__error ${
+                  touched.mail && formErrors.mail ? "form__error--visible" : ""
+                }`}
+                role="alert"
+              >
+                {formErrors.mail}
+              </div>
+            </div>
 
-        <button className="contact-button form-btn" type="submit">
-          SEND
-        </button>
-      </form>
-    </div>
+            <div className="form__block">
+              <label className="form__label" htmlFor="text">
+                Your Message
+              </label>
+              <textarea
+                className={`form__input form__input--txt ${
+                  touched.text && formErrors.text ? "invalid" : ""
+                }`}
+                id="text"
+                name="message"
+                value={formValues.text}
+                onChange={handleChange}
+                aria-invalid={
+                  touched.text && formErrors.text ? "true" : "false"
+                }
+              />
+              <div
+                className={`form__error ${
+                  touched.text && formErrors.text ? "form__error--visible" : ""
+                }`}
+                role="alert"
+              >
+                {formErrors.text}
+              </div>
+            </div>
+
+            <button className="contact-button form-btn" type="submit">
+              SEND
+            </button>
+          </form>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

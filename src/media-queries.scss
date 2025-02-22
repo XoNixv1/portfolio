@@ -24,6 +24,11 @@
     min-width: 500px;
     height: auto;
   }
+  .contact-button:hover {
+    background-color: black;
+    border-color: white;
+    color: white;
+  }
 }
 
 @media (max-width: 1025px) {
@@ -131,6 +136,21 @@
   .footer__link {
     font-size: 12px;
   }
+  .form {
+    width: 370px;
+    height: 600px;
+  }
+  .form-btn {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+  }
+  .form__input--txt {
+    height: 11rem;
+  }
+  .form__block {
+    gap: 0;
+  }
 }
 
 @media (max-width: 321px) {
@@ -167,5 +187,9 @@
   .project-block__container {
     max-width: 80%;
     padding: 10px;
+  }
+  .form {
+    width: 310px;
+    height: 600px;
   }
 }

@@ -74,16 +74,15 @@
 
 .form-btn {
   position: fixed;
-  color: black;
   background-color: white;
   border-color: black;
+  color: black;
   bottom: 2rem;
   left: 2rem;
   z-index: 2;
   &:hover {
     border-color: black;
     color: black;
-    background-color: rgb(240, 240, 240);
   }
 }
 
