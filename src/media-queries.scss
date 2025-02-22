@@ -1,0 +1,171 @@
+@media (max-width: 1441px) {
+  .project-block {
+    margin-top: 7rem;
+  }
+  .project-block__container {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  .project-block__descr {
+    max-width: 100%;
+    align-items: center;
+  }
+  .github-button {
+    font-size: 16px;
+  }
+  .carousel-container {
+    width: auto;
+  }
+  .main-image {
+    max-width: 33%;
+  }
+  .project-block__container {
+    padding: 30px;
+    min-width: 500px;
+    height: auto;
+  }
+}
+
+@media (max-width: 1025px) {
+  .project-block {
+    flex-direction: column;
+    &__container {
+      max-width: 100%;
+    }
+    &__descr {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 1rem;
+      width: 100%;
+      margin: 0;
+    }
+  }
+  .github-button {
+    font-size: 16px;
+  }
+  .txt {
+    font-size: 18px;
+    text-align: center;
+  }
+  .about-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .label {
+    align-self: center;
+    text-align: center;
+    font-size: 32px;
+  }
+  .main-block {
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+  }
+  .descr-wrapper {
+    max-width: 100%;
+    align-items: center;
+  }
+  .descr {
+    font-size: 18px;
+  }
+  .main-image {
+    order: -1;
+    margin: 0;
+    margin-bottom: 1rem;
+    max-width: 100%;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    object-position: center -20px;
+    border: 2px solid white;
+  }
+  .gmail {
+    align-self: center;
+  }
+  .header-links {
+    margin-right: 2rem;
+    gap: 3rem;
+  }
+  .descr {
+    text-align: center;
+  }
+}
+
+@media (max-width: 769px) {
+  .container {
+    padding: 10rem 5rem 10rem 5rem;
+  }
+}
+
+@media (max-width: 426px) {
+  .wrapper {
+    flex-direction: column;
+  }
+  .header-links {
+    margin-right: 0;
+    font-size: 16px;
+    gap: 3rem;
+  }
+  .header-name {
+    margin: 0;
+    margin-bottom: 1.5rem;
+    font-size: 26px;
+  }
+  .container {
+    padding: 5rem 3rem 5rem 3rem;
+  }
+  .label {
+    font-size: 26px;
+  }
+  .txt {
+    font-size: 16px;
+  }
+  .project-block__container {
+    height: 50%;
+    margin-bottom: 2rem;
+    min-width: 300px;
+    min-height: 150px;
+  }
+  .footer__link {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 321px) {
+  .footer {
+    padding: 0.8rem;
+  }
+  .footer__link {
+    font-size: 11px;
+  }
+  .header-links {
+    margin-right: 0;
+    font-size: 14px;
+    gap: 2rem;
+  }
+  .header {
+    padding: 1rem;
+  }
+  .descr {
+    font-size: 16px;
+  }
+  .txt {
+    font-size: 16px;
+  }
+  .container {
+    padding: 1rem;
+  }
+  .project-block__descr {
+    max-width: 78%;
+  }
+  .buttons {
+    gap: 0.5rem;
+    max-width: 80%;
+  }
+  .project-block__container {
+    max-width: 80%;
+    padding: 10px;
+  }
+}

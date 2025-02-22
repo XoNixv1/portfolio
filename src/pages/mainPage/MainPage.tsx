@@ -44,7 +44,7 @@ export default function MainPage(): JSX.Element {
             alt="photo"
           />
         </div>
-        <div className="gmail link">
+        <div className="gmail">
           <img src="/assets/icons8-gmail.svg" alt="gmail" />
           <a href={gmailLink} target="_blank" rel="noopener noreferrer">
             {email}
