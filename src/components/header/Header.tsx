@@ -1,7 +1,7 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./header.scss";
 
-export default function Header(): JSX.Element {
+export default function Header() {
   return (
     <header className="header">
       <div className="wrapper">
