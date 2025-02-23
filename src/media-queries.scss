@@ -74,26 +74,26 @@
     width: 100%;
   }
   .descr-wrapper {
-    max-width: 100%;
+    max-width: 100% !important;
     align-items: center;
   }
   .descr {
     font-size: 18px;
   }
   .main-image {
-    order: -1;
-    margin: 0;
-    margin-bottom: 1rem;
-    max-width: 100%;
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 50%;
-    object-position: center -20px;
-    border: 2px solid white;
+    order: -1 !important;
+    margin: 0 !important;
+    margin-bottom: 1rem !important;
+    max-width: 100% !important;
+    width: 200px !important;
+    height: 200px !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+    object-position: center -20px !important;
+    border: 2px solid white !important;
   }
   .gmail {
-    align-self: center;
+    align-self: center !important;
   }
   .header-links {
     margin-right: 2rem;
