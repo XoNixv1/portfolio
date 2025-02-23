@@ -1,9 +1,11 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import MainPage from "../pages/mainPage/MainPage";
-import About from "../pages/aboutPage/About";
+import React from "react";
 import ProjectsPage from "../pages/projectsPage/ProjectsPage";
-import NotFound from "../pages/NotFound404/NotFound";
+
+const MainPage = React.lazy(() => import("../pages/mainPage/MainPage"));
+const About = React.lazy(() => import("../pages/aboutPage/About"));
+const NotFound = React.lazy(() => import("../pages/NotFound404/NotFound"));
 
 export default function AnimatedPages() {
   const location = useLocation();
