@@ -29,6 +29,12 @@
     border-color: white;
     color: white;
   }
+  .github-button {
+    width: auto;
+  }
+  .github-button.deploy {
+    width: auto;
+  }
 }
 
 @media (max-width: 1025px) {
@@ -96,6 +102,9 @@
   .descr {
     text-align: center;
   }
+  .tech-stack {
+    justify-content: center;
+  }
 }
 
 @media (max-width: 769px) {
@@ -151,6 +160,11 @@
   .form__block {
     gap: 0;
   }
+  .tech-stack {
+    img {
+      width: 40px;
+    }
+  }
 }
 
 @media (max-width: 321px) {
@@ -175,7 +189,7 @@
     font-size: 16px;
   }
   .container {
-    padding: 1rem;
+    padding: 2rem 1rem 1rem 1rem;
   }
   .project-block__descr {
     max-width: 78%;
@@ -191,5 +205,29 @@
   .form {
     width: 310px;
     height: 600px;
+  }
+
+  a {
+    font-size: 12px;
+  }
+  .buttons {
+    max-width: 100%;
+  }
+  .tech-stack {
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    img {
+      width: 100%;
+    }
+  }
+  .close-btn {
+    right: 5px;
+    top: 10px;
+    &::after {
+      width: 20px;
+    }
+    &::before {
+      width: 20px;
+    }
   }
 }

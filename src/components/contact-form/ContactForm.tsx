@@ -106,7 +106,7 @@ export default function ContactForm() {
     if (Object.keys(errors).length === 0) {
       const formData = new FormData(e.target as HTMLFormElement);
 
-      formData.append("access_key", "d99775f3-8cc9-4b79-8f4d-a9b190a4f59d"); //4a546538-5b16-48b9-82b9-58e8dbfb6a52 // main one
+      formData.append("access_key", "4a546538-5b16-48b9-82b9-58e8dbfb6a52");
 
       const object = Object.fromEntries(formData);
       const json = JSON.stringify(object);
