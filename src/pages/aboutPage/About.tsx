@@ -12,7 +12,7 @@ export default function About() {
   return (
     <div className="container">
       <div className="about-block">
-        <p className="label">About</p>
+        <h3 className="label">About</h3>
         <div className="devider"></div>
         <p className="txt">
           I am a Frontend Developer with 1 year of experience building web
