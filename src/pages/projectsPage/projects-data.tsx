@@ -42,11 +42,4 @@ export const projects = [
     descr:
       "This project is a League of Legends Champion Explorer, built using TypeScript, Redux, and Node.js with Express for the server-side API. It allows users to explore champions, their stats, abilities, and other related information.",
   },
-  {
-    src: "/assets/projects/post-delete-methods.png",
-    label: "Champion Management",
-    github: "https://github.com/XoNixv1/practice-app",
-    descr:
-      "It was built to practice handling POST and DELETE requests through forms, giving me hands-on experience with basic CRUD operations. I also aimed to improve my understanding of API integration and data management for more complex future projects.",
-  },
 ];
