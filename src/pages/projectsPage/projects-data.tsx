@@ -13,6 +13,7 @@ export const projects = [
     src: "/assets/projects/chat.png",
     label: "Full stack chat app",
     github: "https://github.com/XoNixv1/chat-app-server",
+    link: "https://chat-app-front-production.up.railway.app/login",
     descr:
       "I am currently working on it. Built with Node.js, Next.js, and PostgreSQL. The project uses JWT cookies for user authentication, ensuring secure data and session handling. The primary goal is to create a seamless and user-friendly communication platform. I also plan to integrate WebSockets for real-time updates, allowing messages to appear instantly for all users without requiring page refresh.",
   },
