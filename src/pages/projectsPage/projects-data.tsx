@@ -16,7 +16,7 @@ export const projects = [
     deploy: true,
     link: "https://chat-app-front-production.up.railway.app/login",
     descr:
-      "The project is built with Node.js, Next.js, and PostgreSQL. It uses JWT cookies for user authentication, ensuring secure data and session handling. The primary goal is to create a seamless and user-friendly communication platform. Integration of WebSockets is planned for real-time updates, allowing messages to appear instantly for all users without requiring page refresh.",
+      "The project is built with Node.js, Next.js, and PostgreSQL. It uses JWT cookies for user authentication, ensuring secure data and session handling. The platform includes WebSocket integration for real-time updates, allowing messages to appear instantly for all users without requiring a page refresh. Additionally, OpenAI integration has been added, providing a standard chatbot for each user, enhancing the overall communication experience.",
   },
   {
     src: "/assets/projects/bird-game.png",
