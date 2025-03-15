@@ -15,20 +15,20 @@ export default function About() {
         <h3 className="label">About</h3>
         <div className="devider"></div>
         <p className="txt">
-          I am a Frontend Developer with 1 year of experience building web
-          applications using JavaScript, React, and TypeScript. Before
-          transitioning to web development, I played professionally on the top
-          CIS esports scene and later in Italy, where I was recognized as one of
-          the best in the field. However, I decided to shift my focus to a new
-          challenge that I find equally exciting but more stable for me: web
-          development. Over 5 years in esports, I honed invaluable skills such
-          as communication, patience, and self-improvement. Now, I've completed
-          courses in algorithms, data structures, and modern web development,
-          while continuing to deepen my expertise in JavaScript, React,
-          TypeScript, Redux, and responsive design by applying them in my
-          projects. I remain committed to constant improvement and am dedicated
-          to becoming a professional in this field. Currently, I am expanding my
-          knowledge by learning Node.js, Express, and PostgreSQL.
+          Web Developer with experience in building web applications and working
+          directly with clients to deliver solutions using JavaScript,
+          TypeScript, React, and Node.js. I have hands-on experience with these
+          technologies, gained through various projects. Additionally, I have
+          experience with basic algorithms and data structures and have
+          developed responsive web UI. I continue to independently hone my
+          skills to build a solid foundation in JavaScript. I am also expanding
+          my knowledge in backend development, currently learning more about
+          full stack building with Next.js, and usage of PostgreSQL database.
+          Drawing from my past experience in esports, I have cultivated strong
+          skills in communication, patience, and self-improvement, which have
+          shaped me into a goal-oriented individual. These qualities, along with
+          my passion for continuous growth, are driving my progress in web
+          development.
         </p>
         <p>My tech stack:</p>
         <div className="tech-stack">
