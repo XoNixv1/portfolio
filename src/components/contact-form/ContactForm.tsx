@@ -9,11 +9,83 @@ interface FormErrors {
   mail?: string;
   text?: string;
 }
+
 interface FormValues {
   name: string;
   mail: string;
   text: string;
 }
+
+interface FormFieldProps {
+  id: keyof FormValues;
+  label: string;
+  type?: string;
+  isTextarea?: boolean;
+  value: string;
+  error?: string;
+  touched: boolean;
+  onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+}
+
+const FormField = ({
+  id,
+  label,
+  type = "text",
+  isTextarea = false,
+  value,
+  error,
+  touched,
+  onChange,
+}: FormFieldProps) => {
+  const isInvalid = touched && error;
+  const InputComponent = isTextarea ? "textarea" : "input";
+  const name = id === "mail" ? "email" : id === "text" ? "message" : id;
+
+  return (
+    <div className="form__block">
+      <label className="form__label" htmlFor={id}>
+        {label}
+      </label>
+      <InputComponent
+        className={`form__input ${isTextarea ? "form__input--txt" : ""} ${
+          isInvalid ? "invalid" : ""
+        }`}
+        id={id}
+        name={name}
+        type={!isTextarea ? type : undefined}
+        value={value}
+        onChange={onChange}
+        aria-invalid={isInvalid ? "true" : "false"}
+      />
+      <div
+        className={`form__error ${isInvalid ? "form__error--visible" : ""}`}
+        role="alert"
+      >
+        {error}
+      </div>
+    </div>
+  );
+};
+
+const validateForm = (values: FormValues): FormErrors => {
+  const errors: FormErrors = {};
+
+  if (!values.name) {
+    errors.name = "Name is required";
+  }
+
+  if (!values.mail) {
+    errors.mail = "Email is required";
+  } else if (!/\S+@\S+\.\S+/.test(values.mail)) {
+    errors.mail = "Email is invalid";
+  }
+
+  if (!values.text) {
+    errors.text = "Message is required";
+  }
+
+  return errors;
+};
 
 export default function ContactForm() {
   const { closeForm, openedForm } = useForm();
@@ -27,8 +99,9 @@ export default function ContactForm() {
     mail: "",
     text: "",
   });
+
   const [formErrors, setFormErrors] = useState<FormErrors>({});
-  const [touched, setTouched] = useState({
+  const [touched, setTouched] = useState<Record<keyof FormValues, boolean>>({
     name: false,
     mail: false,
     text: false,
@@ -57,74 +130,53 @@ export default function ContactForm() {
     };
   }, [openedForm, closeForm]);
 
-  const validate = () => {
-    const errors: FormErrors = {};
-    const updatedTouched: typeof touched = {
-      name: false,
-      mail: false,
-      text: false,
-    };
-
-    if (!formValues.name) {
-      errors.name = "Name is required";
-      updatedTouched.name = true;
-    }
-
-    if (!formValues.mail) {
-      errors.mail = "Email is required";
-      updatedTouched.mail = true;
-    } else if (!/\S+@\S+\.\S+/.test(formValues.mail)) {
-      errors.mail = "Email is invalid";
-      updatedTouched.mail = true;
-    }
-
-    if (!formValues.text) {
-      errors.text = "Message is required";
-      updatedTouched.text = true;
-    }
-
-    setTouched(updatedTouched);
-
-    return errors;
-  };
-
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { id, value } = e.target;
-    setFormValues({ ...formValues, [id]: value });
-    setTouched({ ...touched, [id]: false });
+    setFormValues((prev) => ({ ...prev, [id]: value }));
+    setTouched((prev) => ({ ...prev, [id]: false }));
   };
 
   // SUBMIT
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const errors = validate();
+
+    // Mark all fields as touched
+    setTouched({
+      name: true,
+      mail: true,
+      text: true,
+    });
+
+    const errors = validateForm(formValues);
     setFormErrors(errors);
 
-    //sending with web3
     if (Object.keys(errors).length === 0) {
       const formData = new FormData(e.target as HTMLFormElement);
-
       formData.append("access_key", "4a546538-5b16-48b9-82b9-58e8dbfb6a52");
 
       const object = Object.fromEntries(formData);
       const json = JSON.stringify(object);
 
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: json,
-      }).then((res) => res.json());
+      try {
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: json,
+        }).then((res) => res.json());
 
-      if (res.success && openedForm) {
-        setFormValues({ name: "", mail: "", text: "" });
-        setSuccessOpened(true);
-      } else {
-        console.error("Error:", res);
+        if (res.success && openedForm) {
+          setFormValues({ name: "", mail: "", text: "" });
+          setSuccessOpened(true);
+        } else {
+          console.error("Error:", res);
+        }
+      } catch (error) {
+        console.error("Submission error:", error);
       }
     }
   };
@@ -168,85 +220,34 @@ export default function ContactForm() {
             <span className="close-btn" onClick={closeForm}></span>
             <p className="form__header">CONTACT</p>
 
-            <div className="form__block">
-              <label className="form__label" htmlFor="name">
-                Your Name
-              </label>
-              <input
-                className={`form__input ${
-                  touched.name && formErrors.name ? "invalid" : ""
-                }`}
-                id="name"
-                name="name"
-                type="text"
-                value={formValues.name}
-                onChange={handleChange}
-                aria-invalid={
-                  touched.name && formErrors.name ? "true" : "false"
-                }
-              />
-              <div
-                className={`form__error ${
-                  touched.name && formErrors.name ? "form__error--visible" : ""
-                }`}
-                role="alert"
-              >
-                {formErrors.name}
-              </div>
-            </div>
+            <FormField
+              id="name"
+              label="Your Name"
+              value={formValues.name}
+              error={formErrors.name}
+              touched={touched.name}
+              onChange={handleChange}
+            />
 
-            <div className="form__block">
-              <label className="form__label" htmlFor="mail">
-                Your Email
-              </label>
-              <input
-                className={`form__input ${
-                  touched.mail && formErrors.mail ? "invalid" : ""
-                }`}
-                id="mail"
-                name="email"
-                type="email"
-                value={formValues.mail}
-                onChange={handleChange}
-                aria-invalid={
-                  touched.mail && formErrors.mail ? "true" : "false"
-                }
-              />
-              <div
-                className={`form__error ${
-                  touched.mail && formErrors.mail ? "form__error--visible" : ""
-                }`}
-                role="alert"
-              >
-                {formErrors.mail}
-              </div>
-            </div>
+            <FormField
+              id="mail"
+              label="Your Email"
+              type="email"
+              value={formValues.mail}
+              error={formErrors.mail}
+              touched={touched.mail}
+              onChange={handleChange}
+            />
 
-            <div className="form__block">
-              <label className="form__label" htmlFor="text">
-                Your Message
-              </label>
-              <textarea
-                className={`form__input form__input--txt ${
-                  touched.text && formErrors.text ? "invalid" : ""
-                }`}
-                id="text"
-                name="message"
-                value={formValues.text}
-                onChange={handleChange}
-                aria-invalid={
-                  touched.text && formErrors.text ? "true" : "false"
-                }
-              />
-              <div
-                className={`form__error ${
-                  touched.text && formErrors.text ? "form__error--visible" : ""
-                }`}
-                role="alert"
-              >
-                {formErrors.text}
-              </div>
-            </div>
+            <FormField
+              id="text"
+              label="Your Message"
+              isTextarea
+              value={formValues.text}
+              error={formErrors.text}
+              touched={touched.text}
+              onChange={handleChange}
+            />
 
             <button className="contact-button form-btn" type="submit">
               SEND

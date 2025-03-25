@@ -1,30 +1,40 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
-interface Context {
+interface FormContextType {
   openedForm: boolean;
   openForm: () => void;
   closeForm: () => void;
 }
 
-const FormContext = createContext<Context | undefined>(undefined);
+const FormContext = createContext<FormContextType | null>(null);
 
-export const FormProvider = ({ children }: { children: ReactNode }) => {
+interface FormProviderProps {
+  children: ReactNode;
+}
+
+export const FormProvider = ({ children }: FormProviderProps) => {
   const [openedForm, setOpenedForm] = useState(false);
 
-  const openForm = (): void => setOpenedForm(true);
-  const closeForm = (): void => setOpenedForm(false);
+  const openForm = () => setOpenedForm(true);
+  const closeForm = () => setOpenedForm(false);
+
+  const contextValue: FormContextType = {
+    openedForm,
+    openForm,
+    closeForm,
+  };
 
   return (
-    <FormContext.Provider value={{ openedForm, openForm, closeForm }}>
-      {children}
-    </FormContext.Provider>
+    <FormContext.Provider value={contextValue}>{children}</FormContext.Provider>
   );
 };
 
-export const useForm = () => {
+export const useForm = (): FormContextType => {
   const context = useContext(FormContext);
-  if (!context) {
-    throw new Error("not in form provider");
+
+  if (context === null) {
+    throw new Error("useForm must be used within a FormProvider");
   }
+
   return context;
 };
