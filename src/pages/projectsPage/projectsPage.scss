@@ -8,19 +8,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.589);
+    box-shadow: 0 2px 5px var(--border-color);
     border-radius: 0.5rem;
-    background-color: rgb(34, 33, 33);
+    background-color: var(--border-color);
     width: 40%;
     height: auto;
     padding: 0.5rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+
     img {
-      border: 1px solid rgba(255, 255, 255, 0.678);
+      border: 1px solid rgba(255, 255, 255, 0.267);
       border-radius: 0.5rem;
       width: auto;
       height: auto;
     }
   }
+
   &__descr {
     display: flex;
     flex-direction: column;
@@ -28,6 +31,9 @@
     margin-left: 4rem;
     font-weight: 400;
     font-size: 20px;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+
     &--label {
       font-weight: 700;
       font-size: 1.6rem;
@@ -43,6 +49,9 @@
   font-size: 42px;
   margin-bottom: 2rem;
   font-weight: 900;
+  color: var(--text-color);
+  transition: color 0.3s ease;
+
   &__descr {
     margin-top: 1rem;
     font-size: 20px;
@@ -67,9 +76,11 @@
   gap: 1rem;
   height: 2.4rem;
   width: 12rem;
-  color: #c9cd0df2;
-  background-color: black;
-  border-bottom: 1px solid #c9cd0df2;
+  color: var(--link-hover-color);
+  background-color: var(--background-color);
+  border-bottom: 1px solid var(--link-hover-color);
+  transition: all 0.3s ease;
+
   img {
     height: 2rem;
   }
@@ -78,6 +89,8 @@
 .projects-block {
   margin-top: 10rem;
   margin-bottom: 10rem;
+  background-color: var(--background-color);
+  transition: background-color 0.3s ease;
 }
 
 .note {

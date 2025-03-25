@@ -108,19 +108,30 @@
 }
 
 @media (max-width: 769px) {
+  .wrapper {
+    flex-direction: column;
+  }
   .container {
     padding: 10rem 5rem 10rem 5rem;
   }
 }
 
 @media (max-width: 426px) {
+  .theme-toggle {
+    position: absolute;
+    right: 30px;
+    top: 23px;
+  }
   .wrapper {
     flex-direction: column;
+  }
+  .header-name {
+    align-self: start;
   }
   .header-links {
     margin-right: 0;
     font-size: 16px;
-    gap: 3rem;
+    gap: 2rem;
   }
   .header-name {
     margin: 0;

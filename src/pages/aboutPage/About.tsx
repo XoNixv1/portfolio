@@ -8,6 +8,21 @@ const images: string[] = [
   "/assets/about/photos/hq720.jpg",
 ];
 
+const svgFiles = [
+  "tech-1.svg",
+  "tech-2.svg",
+  "tech-3.svg",
+  "tech-4.svg",
+  "tech-5.svg",
+  "tech-6.svg",
+  "tech-7.svg",
+  "tech-8.svg",
+  "tech-9.svg",
+  "tech-10.svg",
+  "tech-11.svg",
+  "tech-12.svg",
+];
+
 export default function About() {
   return (
     <div className="container">
@@ -32,36 +47,12 @@ export default function About() {
         </p>
         <p>My tech stack:</p>
         <div className="tech-stack">
-          <img
-            src="/assets/about/tech-stack/icons8-javascript.svg"
-            alt="javascript logo"
-          />
-          <img
-            src="/assets/about/tech-stack/icons8-typescript.svg"
-            alt="typescript logo"
-          />
-          <img
-            src="/assets/about/tech-stack/icons8-react.svg"
-            alt="react logo"
-          />
-          <img
-            src="/assets/about/tech-stack/icons8-html-5.svg"
-            alt="html5 logo"
-          />
-          <img src="/assets/about/tech-stack/icons8-css3.svg" alt="css3 logo" />
-          <img
-            src="/assets/about/tech-stack/icons8-git-logo.svg"
-            alt="git logo"
-          />
-          <img src="/assets/about/tech-stack/icons8-sass.svg" alt="sass logo" />
-          <img
-            src="/assets/about/tech-stack/icons8-redux.svg"
-            alt="redux logo"
-          />
-          <img
-            src="/assets/about/tech-stack/icons8-node-js.svg"
-            alt="redux logo"
-          />
+          {svgFiles.map((svgName, i) => (
+            <img
+              src={`/assets/about/tech-stack/${svgName}`}
+              alt={`Tech-icon-${i + 1}`}
+            />
+          ))}
         </div>
         <Carousel images={images} />
       </div>

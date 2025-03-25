@@ -27,6 +27,11 @@
   a {
     img {
       transition: filter 0.3s ease-in-out;
+
+      [data-theme="light"] & {
+        filter: brightness(0);
+      }
+
       &:hover {
         filter: sepia(1) saturate(1000%) hue-rotate(10deg) brightness(1.2);
       }
@@ -52,11 +57,18 @@
   font-weight: 500;
   max-width: 13.5rem;
   gap: 0.3rem;
+
   &:hover {
     filter: sepia(1) saturate(1000%) hue-rotate(10deg) brightness(1.2);
   }
+
   img {
     padding: 0.1rem;
     max-height: 1.5rem;
+    transition: filter 0.3s ease-in-out;
+
+    [data-theme="light"] & {
+      filter: brightness(0);
+    }
   }
 }

@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
+import ThemeToggle from "./ThemeToggle";
 import "./header.scss";
 
-// Navigation link configuration
 interface NavItem {
   path: string;
   label: string;
@@ -13,7 +13,6 @@ const navItems: NavItem[] = [
   { path: "/projects", label: "Projects" },
 ];
 
-// Reusable navigation link component
 const NavigationLink = ({ path, label }: NavItem) => (
   <NavLink
     className={({ isActive }) => (isActive ? "link__active" : "link")}
@@ -34,6 +33,7 @@ export default function Header() {
           {navItems.map((item) => (
             <NavigationLink key={item.path} {...item} />
           ))}
+          <ThemeToggle />
         </div>
       </div>
     </header>

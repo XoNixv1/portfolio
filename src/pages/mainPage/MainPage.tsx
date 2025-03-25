@@ -6,10 +6,7 @@ export default function MainPage() {
   const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}`;
   const { openForm } = useForm();
   return (
-    <div
-      className="main-page"
-      style={{ backgroundColor: "#000", color: "white", height: "100%" }}
-    >
+    <div className="main-page">
       <div className="container">
         <div className="main-block">
           <div className="descr-wrapper">
@@ -26,7 +23,10 @@ export default function MainPage() {
               CONTACT
             </button>
             <div className="contacts">
-              <a href="https://www.linkedin.com/in/khaled-noman-19384733b/">
+              <a
+                className="svg-icon"
+                href="https://www.linkedin.com/in/khaled-noman-19384733b/"
+              >
                 <img src="/assets/icons8-linkedin.svg" alt="Linkedin" />
               </a>
               <a href="https://github.com/XoNixv1">
