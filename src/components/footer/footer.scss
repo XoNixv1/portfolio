@@ -1,25 +1,23 @@
 .footer {
-  padding: 1.5rem;
-  background-color: grey;
+  padding: 0.5rem;
   opacity: 0.8;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.6);
-  box-shadow: 0 1px 5px rgb(250, 250, 250);
+  border-top: 1px solid rgba(128, 128, 128, 0.247);
   &__links {
     gap: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-    color: white;
+    font-size: 0.6rem;
+    margin-bottom: 0.5rem;
+    color: var(--footer-links-color);
   }
   &__rights {
-    color: white;
+    color: var(--footer-links-color);
   }
   &__rights {
     width: max-content;
     margin: 0 auto;
-    font-size: 0.7rem;
+    font-size: 0.5rem;
     opacity: 0.8;
   }
   &__contacts {

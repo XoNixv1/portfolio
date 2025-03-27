@@ -2,9 +2,10 @@
 @import "tailwindcss";
 
 :root {
-  /* Dark theme is default */
+  /* dark theme is default */
   --background-color: black;
   --text-color: white;
+  --footer-links-color: rgba(255, 255, 255, 0.507);
   --border-color: rgba(128, 128, 128, 0.6);
   --link-hover-color: #fdff73;
   --header-name-color: #a0a0a0;
@@ -19,9 +20,10 @@
   --form-error: #ff5757;
 }
 
-/* Light theme */
+/* light theme */
 [data-theme="light"] {
   --background-color: #e9e9e9;
+  --footer-links-color: rgb(56, 56, 56);
   --text-color: #333;
   --border-shadow: rgba(0, 0, 0, 0.274);
   --border-color: rgba(0, 0, 0, 0.308);
@@ -47,7 +49,7 @@ h1 {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 8rem 15rem 2rem 15rem;
+  padding: 7rem 15rem 2rem 15rem;
   align-items: center;
   justify-content: space-between;
   justify-content: center;
