@@ -3,7 +3,7 @@
 
 :root {
   /* dark theme is default */
-  --background-color: black;
+  --background-color: #13151a;
   --text-color: white;
   --footer-links-color: rgba(255, 255, 255, 0.507);
   --border-color: rgba(128, 128, 128, 0.6);
@@ -18,6 +18,7 @@
   --modal-background: #f5f5f5;
   --modal-text: black;
   --form-error: #ff5757;
+  --footer-background: #111316;
 }
 
 /* light theme */
@@ -38,6 +39,7 @@
   --modal-background: white;
   --modal-text: #333;
   --form-error: #d32f2f;
+  --footer-background: #dbd8d871;
 }
 
 h1 {
